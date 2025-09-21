@@ -1,0 +1,241 @@
+/* frontend/src/components/Header.css */
+
+
+:root {
+  --primary-color: #ff6200;
+  --white-color: #ffffff;
+  --light-hover-bg: rgba(255, 255, 255, 0.2);
+  --border-radius-rounded: 20px;
+  --font-family-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.main-header {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 10px 0;
+  font-family: var(--font-family-main);
+ 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; 
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 20px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+  flex-shrink: 0; 
+}
+
+.center-section {
+  display: flex;
+  flex: 1;
+  min-width: 280px;
+  gap: 15px;
+  align-items: center;
+}
+
+.location-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--light-hover-bg);
+  border-radius: var(--border-radius-rounded);
+  padding: 6px 12px;
+  flex: 0.4;
+  min-width: 150px;
+}
+
+.location-input {
+  background: none;
+  border: none;
+  color: var(--white-color);
+  font-size: 0.9rem;
+  width: 100%;
+  outline: none;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-rounded);
+  padding: 6px 12px;
+  flex: 1; 
+}
+
+.search-input {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  width: 100%;
+  outline: none;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  padding: 0 5px;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-icon {
+  height: 28px;
+  width: auto;
+}
+
+/*  NOME DO USUÁRIO  */
+.welcome-msg {
+  color: var(--white-color);
+  text-decoration: none; 
+  font-weight: bold;
+  transition: opacity 0.2s; 
+}
+
+.welcome-msg:hover {
+  opacity: 0.85;
+}
+/* ------------------------------------------- */
+
+.login-btn,
+.cadastro-btn {
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-rounded);
+  padding: 6px 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  white-space: nowrap; 
+}
+
+.login-btn {
+  background: var(--white-color);
+  color: var(--primary-color);
+}
+
+.login-btn:hover {
+  background: #f1f1f1;
+}
+
+.cadastro-btn {
+  background: transparent;
+  color: var(--white-color);
+  border-color: var(--white-color);
+}
+
+.cadastro-btn:hover {
+  background: var(--light-hover-bg);
+}
+
+/* Acessibilidade: anel de foco visível para navegação com teclado */
+.login-btn:focus-visible,
+.cadastro-btn:focus-visible,
+.cart-btn:focus-visible,
+.search-btn:focus-visible {
+  outline: 2px solid var(--white-color);
+  outline-offset: 2px;
+}
+
+.search-input:focus-visible,
+.location-input:focus-visible {
+   box-shadow: 0 0 0 2px var(--primary-color), 0 0 0 4px var(--white-color);
+}
+
+
+/* 2. Responsividade para telas menores (ex: celulares) */
+@media (max-width: 768px) {
+  .header-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  /* Reorganiza a ordem para mobile */
+  .logo {
+    align-self: flex-start; 
+  }
+  
+  .center-section {
+    order: 3; 
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .right-section {
+    order: 2; 
+    justify-content: flex-end; 
+    position: absolute; 
+    top: 15px;
+    right: 20px;
+  }
+}
+/* Estilo para o container do menu suspenso */
+.profile-menu-container {
+    position: relative; 
+}
+
+
+.profile-dropdown-menu {
+    position: absolute; 
+    top: 100%; 
+    right: 0; 
+    
+    display: flex;
+    flex-direction: column;
+    
+    background-color: #fff;
+    border-radius: 8px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    
+   
+    padding: 8px 0;
+    
+    /* Z-index para garantir que o menu fique acima de outros elementos */
+    z-index: 100;
+}
+
+/*  Estilo para cada botão dentro do menu suspenso */
+.profile-dropdown-menu button {
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 12px 24px; 
+    font-size: 1rem;
+    color: #333; 
+    cursor: pointer;
+    white-space: nowrap; 
+}
+
+/* Efeito ao passar o mouse sobre os botões */
+.profile-dropdown-menu button:hover {
+    background-color: #f5f5f5;
+}
