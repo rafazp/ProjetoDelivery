@@ -151,10 +151,6 @@ const Perfil = () => {
             <label htmlFor="phone_number">Telefone</label>
             <input type="tel" id="phone_number" name="phone_number" value={formData.phone_number || ''} onChange={handleInputChange} />
           </div>
-          <div className="form-group">
-            <label htmlFor="address">Endereço</label>
-            <input type="text" id="address" name="address" value={formData.address || ''} onChange={handleInputChange} />
-          </div>
           <div className="form-actions">
             <button type="submit" className="btn-save">Salvar Alterações</button>
             <button type="button" className="btn-cancel" onClick={() => setIsEditing(false)}>Cancelar</button>
@@ -165,7 +161,6 @@ const Perfil = () => {
           <h1>Perfil de {profileData.name || user?.name}</h1>
           <p><strong>Email:</strong> {profileData.email}</p>
           <p><strong>Telefone:</strong> {profileData.phone_number || 'Não informado'}</p>
-          <p><strong>Endereço:</strong> {profileData.address || 'Não informado'}</p>
           
           <div className="perfil-section">
             <h2>Meus Cartões</h2>

@@ -7,13 +7,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>© {new Date().getFullYear()} GekkoState - Todos os direitos reservados.</p>
-        
-        <nav className="footer-links">
-          <Link to="/">Início</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/cadastro">Cadastro</Link>
-        </nav>
+        <p>© {new Date().getFullYear()} UaiEats - Todos os direitos reservados.</p>
       </div>
     </footer>
   );

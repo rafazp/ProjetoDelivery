@@ -67,7 +67,7 @@ class RegisterView(APIView):
             profile.save()
 
             try:
-                subject = 'Seu Código de Verificação Foody'
+                subject = 'Seu Código de Verificação UaiEats'
                 message = f'Olá {user.first_name},\n\nSeu código para ativar sua conta é: {code}\n\nEle expira em 15 minutos.'
                 from_email = settings.EMAIL_HOST_USER
                 recipient_list = [user.email]

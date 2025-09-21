@@ -1,7 +1,10 @@
 import axios from "axios";
 
+// Pega a URL base da API da variável de ambiente
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const api = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
+    baseURL: API_BASE_URL,
 });
 
 api.interceptors.request.use(
@@ -31,7 +34,8 @@ api.interceptors.response.use(
                     return Promise.reject(error);
                 }
 
-                const response = await axios.post('http://127.0.0.1:8000/api/token/refresh/', {
+                // Usa a variável de ambiente para a URL de refresh
+                const response = await axios.post(`${API_BASE_URL}/token/refresh/`, {
                     refresh: refreshToken,
                 });
 
@@ -64,7 +68,7 @@ const handleRequest = async (request) => {
     }
 };
 
-// --------- Autenticação e Usuário ---------
+// As funções de exportação já estão corretas, pois usam a instância 'api'
 export const loginUser = (credentials) => handleRequest(() => api.post("/login/", credentials));
 export const registerUser = (userData) => handleRequest(() => api.post("/register/", userData));
 export const verifyEmail = (verificationData) => handleRequest(() => api.post("/verify-email/", verificationData));
@@ -72,31 +76,25 @@ export const getProfile = () => handleRequest(() => api.get("/profile/"));
 export const updateProfile = (profileData) => handleRequest(() => api.put("/profile/", profileData));
 export const changePassword = (passwordData) => handleRequest(() => api.put("/change-password/", passwordData));
 
-// --------- Gerenciamento de Usuários (Admin) ---------
-// Garanta que estas linhas estejam no seu arquivo
 export const getUsers = () => handleRequest(() => api.get("/users/"));
 export const deleteUser = (userId) => handleRequest(() => api.delete(`/users/${userId}/`));
 export const toggleUserActive = (userId) => handleRequest(() => api.post(`/users/${userId}/toggle-active/`));
 
-// --------- Restaurantes ---------
 export const getRestaurants = () => handleRequest(() => api.get("/restaurants/"));
 export const addRestaurant = (data) => handleRequest(() => api.post("/restaurants/", data));
 export const getRestaurantDetails = (id) => handleRequest(() => api.get(`/restaurants/${id}/`));
 export const updateRestaurant = (id, data) => handleRequest(() => api.put(`/restaurants/${id}/`, data));
 export const deleteRestaurantAPI = (id) => handleRequest(() => api.delete(`/restaurants/${id}/`));
 
-// --------- Pratos (Dishes) ---------
 export const getDishesForRestaurant = (restaurantId) => handleRequest(() => api.get(`/restaurants/${restaurantId}/dishes/`));
 export const addDish = (restaurantId, data) => handleRequest(() => api.post(`/restaurants/${restaurantId}/dishes/`, data));
 export const getDishDetails = (restaurantId, dishId) => handleRequest(() => api.get(`/restaurants/${restaurantId}/dishes/${dishId}/`));
 export const updateDish = (restaurantId, dishId, data) => handleRequest(() => api.put(`/restaurants/${restaurantId}/dishes/${dishId}/`, data));
 export const deleteDishAPI = (restaurantId, dishId) => handleRequest(() => api.delete(`/restaurants/${restaurantId}/dishes/${dishId}/`));
 
-// --------- Pedidos (Orders) ---------
 export const createOrder = (orderData) => handleRequest(() => api.post("/orders/", orderData));
 export const getOrders = () => handleRequest(() => api.get("/orders/"));
 
-// --------- Cartões (Cards) ---------
 export const getCards = () => handleRequest(() => api.get("/cards/"));
 export const addCard = (cardData) => handleRequest(() => api.post("/cards/", cardData));
 export const deleteCard = (cardId) => handleRequest(() => api.delete(`/cards/${cardId}/`));

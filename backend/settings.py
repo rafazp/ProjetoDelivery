@@ -10,26 +10,29 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from dotenv import load_dotenv
 from pathlib import Path
-import os # 👈 Adicione este import para usar variáveis de ambiente
+import os
+import dj_database_url # 👈 Adicione esta biblioteca
+
+# Carrega as variáveis de ambiente do arquivo .env
+load_dotenv() 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+# --- Configurações de Segurança para Produção ---
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cp87t55q=1h3%_!15zt+dhxn1_cfdt+_2s5(50sfl-^4mb58k6'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 't')
 
-ALLOWED_HOSTS = []
+# Lista de hosts permitidos. O domínio do seu backend deve estar aqui.
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
-
-# Application definition
+# --- Configurações do App ---
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -74,20 +77,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# --- Configuração do Banco de Dados ---
+# Usando dj_database_url para configurar o PostgreSQL em produção
+# O `default` usa o SQLite, ideal para desenvolvimento local.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+        conn_max_age=600
+    )
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+# --- Password validation ---
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,36 +110,33 @@ REST_FRAMEWORK = {
     )
 }
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
+# --- Internacionalização ---
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+# --- Configuração de arquivos estáticos (CSS, JS, Imagens) ---
 
 STATIC_URL = 'static/'
+# Adicione a configuração de STATIC_ROOT para a produção
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
+# --- Configuração de CORS para produção ---
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('FRONTEND_URL') # Pega a URL do frontend do .env
+]
 
-# --- CONFIGURAÇÃO DE E-MAIL ---
+# --- Configuração de E-mail ---
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'authfood71@gmail.com'      
-EMAIL_HOST_PASSWORD = 'humtaeddfaosivlk'    
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() in ('true', '1', 't')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')

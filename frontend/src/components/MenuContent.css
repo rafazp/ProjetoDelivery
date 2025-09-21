@@ -43,3 +43,36 @@
     color: #333;
     margin: 0 0 10px 0;
 }
+
+/* Novo estilo para o botão */
+.add-to-cart-btn {
+    background-color: #fff;
+    color: #ff6200;
+    border: 1px solid #ff6200;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 90%;
+    margin: 0 auto 10px auto;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-cart-btn:hover {
+    background-color: #ff6200;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para o ícone SVG */
+.cart-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor; /* Faz com que a cor do ícone seja a mesma do texto */
+}

@@ -1,6 +1,5 @@
 /* frontend/src/components/Header.css */
 
-
 :root {
   --primary-color: #ff6200;
   --white-color: #ffffff;
@@ -14,7 +13,6 @@
   color: var(--white-color);
   padding: 10px 0;
   font-family: var(--font-family-main);
- 
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -32,64 +30,62 @@
   gap: 20px;
 }
 
+.logo-link {
+    flex-shrink: 0;
+}
+
 .logo {
   height: 50px;
   width: auto;
-  flex-shrink: 0; 
 }
 
 .center-section {
   display: flex;
   flex: 1;
+  justify-content: center;
   min-width: 280px;
   gap: 15px;
   align-items: center;
 }
 
-.location-bar {
-  display: flex;
-  align-items: center;
-  background-color: var(--light-hover-bg);
-  border-radius: var(--border-radius-rounded);
-  padding: 6px 12px;
-  flex: 0.4;
-  min-width: 150px;
-}
-
-.location-input {
-  background: none;
-  border: none;
-  color: var(--white-color);
-  font-size: 0.9rem;
-  width: 100%;
-  outline: none;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  background-color: var(--white-color);
-  border-radius: var(--border-radius-rounded);
-  padding: 6px 12px;
-  flex: 1; 
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--white-color);
+    border-radius: var(--border-radius-rounded);
+    padding: 8px 15px;
+    flex: 0.8;
+    max-width: 600px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .search-input {
   background: none;
   border: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
   width: 100%;
   outline: none;
+  color: #333;
+  padding: 0;
 }
 
 .search-btn {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.2rem;
-  color: var(--primary-color);
   padding: 0 5px;
+  color: #ff6200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.search-btn svg {
+    fill: currentColor;
+    width: 20px;
+    height: 20px;
+}
+
 
 .right-section {
   display: flex;
@@ -106,25 +102,51 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  /* Estilo para o círculo de fundo */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Borda sutil */
+}
+.cart-btn:hover {
+    background-color: var(--light-hover-bg);
 }
 
-.cart-icon {
-  height: 28px;
-  width: auto;
+/* Novo estilo para o SVG */
+.cart-icon-svg {
+    fill: var(--white-color);
+    width: 28px;
+    height: 28px;
+    transition: fill 0.2s;
 }
 
-/*  NOME DO USUÁRIO  */
+/* Estilo para o contador do carrinho */
+.cart-count {
+    position: absolute;
+    top: 0px; /* Posição para ficar no canto superior direito */
+    right: 0px;
+    background-color: white; /* Fundo branco */
+    color: var(--primary-color); /* Cor do texto laranja */
+    border-radius: 50%; /* Faz um círculo */
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 18px; /* Garante que o círculo seja visível */
+    text-align: center;
+    line-height: 1.2;
+    transform: translate(50%, -50%); /* Ajuste fino da posição */
+}
+
+/* NOME DO USUÁRIO */
 .welcome-msg {
   color: var(--white-color);
   text-decoration: none; 
   font-weight: bold;
   transition: opacity 0.2s; 
+  white-space: nowrap;
 }
 
 .welcome-msg:hover {
   opacity: 0.85;
 }
-/* ------------------------------------------- */
 
 .login-btn,
 .cadastro-btn {
@@ -156,7 +178,6 @@
   background: var(--light-hover-bg);
 }
 
-/* Acessibilidade: anel de foco visível para navegação com teclado */
 .login-btn:focus-visible,
 .cadastro-btn:focus-visible,
 .cart-btn:focus-visible,
@@ -165,13 +186,10 @@
   outline-offset: 2px;
 }
 
-.search-input:focus-visible,
-.location-input:focus-visible {
+.search-input:focus-visible {
    box-shadow: 0 0 0 2px var(--primary-color), 0 0 0 4px var(--white-color);
 }
 
-
-/* 2. Responsividade para telas menores (ex: celulares) */
 @media (max-width: 768px) {
   .header-top-bar {
     flex-direction: column;
@@ -179,8 +197,7 @@
     gap: 15px;
   }
 
-  /* Reorganiza a ordem para mobile */
-  .logo {
+  .logo-link {
     align-self: flex-start; 
   }
   
@@ -197,33 +214,30 @@
     top: 15px;
     right: 20px;
   }
+
+  .search-bar-container {
+    width: 100%;
+    max-width: none;
+  }
 }
-/* Estilo para o container do menu suspenso */
+
 .profile-menu-container {
     position: relative; 
 }
-
 
 .profile-dropdown-menu {
     position: absolute; 
     top: 100%; 
     right: 0; 
-    
     display: flex;
     flex-direction: column;
-    
     background-color: #fff;
     border-radius: 8px; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    
-   
     padding: 8px 0;
-    
-    /* Z-index para garantir que o menu fique acima de outros elementos */
     z-index: 100;
 }
 
-/*  Estilo para cada botão dentro do menu suspenso */
 .profile-dropdown-menu button {
     background: none;
     border: none;
@@ -235,7 +249,6 @@
     white-space: nowrap; 
 }
 
-/* Efeito ao passar o mouse sobre os botões */
 .profile-dropdown-menu button:hover {
     background-color: #f5f5f5;
 }

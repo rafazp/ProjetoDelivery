@@ -1,0 +1,21 @@
+# backend/.gitignore
+
+# Arquivos temporários do Python
+__pycache__/
+*.pyc
+
+# Banco de dados de desenvolvimento
+db.sqlite3
+
+# Ambiente virtual (se estiver na pasta do backend)
+venv/
+env/
+
+# Pasta de arquivos estáticos coletados
+staticfiles/
+
+# Pasta de arquivos de mídia/uploads do usuário
+media/
+
+# Arquivo de variáveis de ambiente com dados sensíveis
+.env
