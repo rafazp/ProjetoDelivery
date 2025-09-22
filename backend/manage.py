@@ -3,6 +3,10 @@
 import os
 import sys
 
+# Garante que a pasta pai seja adicionada ao caminho do Python para
+# que o Django encontre o modulo 'backend'
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 def main():
     """Run administrative tasks."""
